@@ -13,9 +13,7 @@
   "dependencies": {
     "animated": "^0.2.0",
     "antd": "^4.15.0",
-    "bestzip": "^2.2.0",
     "core-js": "^3.9.1",
-    "gsap": "./gsap-bonus.tgz",
     "lodash": "^4.17.4",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -25,12 +23,10 @@
     "react-lite": "^0.15.33",
     "react-motion": "^0.4.7",
     "react-parallax-component": "^1.0.6",
-    "react-redux": "^5.1.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-simple-parallax": "^0.2.6",
     "react-springy-parallax": "^1.3.0",
-    "redux": "^4.0.5",
     "styled-components": "^1.4.6"
   },
   "devDependencies": {
