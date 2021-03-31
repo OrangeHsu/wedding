@@ -17,8 +17,8 @@ const StyledLayout = styled(Layout)`
   min-height: 100vh;
 `;
 
-const Login = lazy(() => import("./page/login"));
-const System = lazy(() => import("./components/System"));
+const Login = lazy(() => import("src/page/login"));
+const System = lazy(() => import("src/components/System"));
 
 const App = () => {
   return (

@@ -28,7 +28,7 @@ module.exports = (env) => {
   const DEV_WEBPACK_ENTRIES = env.dev
     ? [
         "react-hot-loader/patch",
-        "webpack-dev-server/client?http://localhost:8080",
+        "webpack-dev-server/client?http://localhost:3000",
         "webpack/hot/only-dev-server",
       ]
     : [];
