@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "zip": "cd build/ && bestzip wedding.zip ./"
+    "start": "webpack-dev-server --env.dev --progress --colors",
+    "build": "webpack --env.prod --progress --colors"
   },
   "author": "",
   "license": "ISC",
@@ -17,8 +16,6 @@
     "lodash": "^4.17.4",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-app-rewire-hot-loader": "^2.0.1",
-    "react-app-rewired": "^2.1.8",
     "react-dom": "^16.8.6",
     "react-lite": "^0.15.33",
     "react-motion": "^0.4.7",
@@ -31,36 +28,20 @@
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^6.4.1",
     "babel-plugin-dynamic-import": "^1.0.0",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.2.2",
-    "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.24.0",
     "babel-types": "^6.23.0",
-    "html-webpack-plugin": "^5.3.1",
     "image-webpack-loader": "^3.2.0",
     "img-loader": "^2.0.0",
     "mozjpeg": "^4.1.1",
     "pngquant": "^1.2.0",
     "react-hot-loader": "^4.8.0",
-    "webpack": "^4.44.2",
-    "webpack-bundle-analyzer": "^2.3.1",
-    "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^2.11.5"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "webpack": "^2.3.1",
+    "webpack-dev-server": "^2.4.2",
+    "webpack-bundle-analyzer": "^2.3.1"
   }
 }
