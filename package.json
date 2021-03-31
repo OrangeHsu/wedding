@@ -6,7 +6,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build && npm run zip",
-    "zip": "cd build/ && bestzip 2n1.zip ./"
+    "zip": "cd build/ && bestzip wedding.zip ./"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +14,7 @@
     "@fullpage/react-fullpage": "^0.1.19",
     "animated": "^0.2.0",
     "antd": "^4.15.0",
+    "bestzip": "^2.2.0",
     "gsap": "./gsap-bonus.tgz",
     "lodash": "^4.17.4",
     "prop-types": "^15.7.2",
