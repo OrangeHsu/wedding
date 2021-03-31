@@ -11,3 +11,4 @@ $RECYCLE.BIN/
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml
+!gsap-bonus.tgz
