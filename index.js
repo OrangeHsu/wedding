@@ -2,7 +2,7 @@ import { AppContainer } from "react-hot-loader";
 import "react-hot-loader/patch";
 import React from "react";
 import { render } from "react-dom";
-import App from "./App";
+import App from "src/components/App";
 
 const load = (Component) => {
   render(
@@ -17,8 +17,7 @@ load(App);
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
-  console.log(module.hot);
-  module.hot.accept("./App", () => {
+  module.hot.accept("src/components/App", () => {
     load(App);
   });
 }
