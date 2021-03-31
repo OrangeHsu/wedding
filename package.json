@@ -14,6 +14,7 @@
     "animated": "^0.2.0",
     "antd": "^4.15.0",
     "bestzip": "^2.2.0",
+    "core-js": "^3.9.1",
     "gsap": "./gsap-bonus.tgz",
     "lodash": "^4.17.4",
     "prop-types": "^15.7.2",
