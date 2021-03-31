@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build && npm run zip",
+    "build": "react-app-rewired build",
     "zip": "cd build/ && bestzip wedding.zip ./"
   },
   "author": "",
