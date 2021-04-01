@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = (env) => {
   const DEV_BABEL_PRESETS = env.dev
@@ -73,18 +74,6 @@ module.exports = (env) => {
           "process.env": { NODE_ENV: JSON.stringify("production") },
         }),
         new webpack.LoaderOptionsPlugin({ minimize: true, debug: false }),
-        new webpack.optimize.UglifyJsPlugin({
-          compress: {
-            warnings: false,
-            screw_ie8: true,
-            drop_console: true,
-            drop_debugger: true,
-            dead_code: true,
-            global_defs: { __REACT_HOT_LOADER__: undefined },
-          },
-          mangle: { screw_ie8: true },
-          output: { comments: false, screw_ie8: true },
-        }),
       ]
     : [];
 
@@ -143,6 +132,7 @@ module.exports = (env) => {
       ...DEV_WEBPACK_PLUGINS,
       ...PROD_WEBPACK_PLUGINS,
       new MiniCssExtractPlugin(),
+      new UglifyJsPlugin(),
       //new BundleAnalyzerPlugin()
     ],
     devServer: {
@@ -157,5 +147,25 @@ module.exports = (env) => {
       },
     },
     performance: { hints: false },
+    optimization: {
+      minimizer: [
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            mangle: true,
+            warnings: false,
+            compress: {
+              pure_getters: true,
+              unsafe: true,
+              unsafe_comps: true,
+              //screw_ie8: true, // no such option in uglify
+            },
+            output: {
+              comments: false,
+            },
+          },
+          exclude: [/\.min\.js$/gi], // skip pre-minified libs
+        }),
+      ],
+    },
   };
 };
