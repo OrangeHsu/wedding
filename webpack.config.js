@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env) => {
   const DEV_BABEL_PRESETS = env.dev
@@ -28,7 +29,7 @@ module.exports = (env) => {
   const DEV_WEBPACK_ENTRIES = env.dev
     ? [
         "react-hot-loader/patch",
-        "webpack-dev-server/client?http://localhost:3000",
+        "webpack-dev-server/client?http://127.0.0.0:8080",
         "webpack/hot/only-dev-server",
       ]
     : [];
@@ -118,6 +119,11 @@ module.exports = (env) => {
             "image-webpack-loader",
           ],
         },
+        {
+          test: /\.s[ac]ss$/i,
+          // 把 sass-loader 放在首要處理 (第一步)
+          use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        },
       ],
     },
     resolve: {
@@ -136,9 +142,20 @@ module.exports = (env) => {
       }),
       ...DEV_WEBPACK_PLUGINS,
       ...PROD_WEBPACK_PLUGINS,
+      new MiniCssExtractPlugin(),
       //new BundleAnalyzerPlugin()
     ],
-    devServer: { hot: env.dev, contentBase: __dirname, stats: "errors-only" },
+    devServer: {
+      hot: env.dev,
+      disableHostCheck: true,
+      contentBase: __dirname,
+      stats: "errors-only",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers":
+          "Origin, X-Requested-With, Content-Type, Accept",
+      },
+    },
     performance: { hints: false },
   };
 };

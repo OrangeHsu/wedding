@@ -2,12 +2,8 @@ import React, { useEffect } from "react";
 import Parallax from "react-springy-parallax";
 
 // Little helpers ...
-const url = (name, wrap = false) =>
-  `${wrap ? "url(" : ""}build/assets/${name}.svg${wrap ? ")" : ""}`;
-
-const jpegUrl = (name, wrap = false) =>
-  `${wrap ? "url(" : ""}build/assets/${name}.jpeg${wrap ? ")" : ""}`;
-
+const url = (name, format = "svg", wrap = false) =>
+  `${wrap ? "url(" : ""}build/assets/${name}.${format}${wrap ? ")" : ""}`;
 export default class System extends React.Component {
   render() {
     return (
