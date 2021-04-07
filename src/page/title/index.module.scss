@@ -23,7 +23,7 @@
   transform: skew(0deg, -15deg);
 }
 .right {
-  color: black;
+  color: #fff;
   transform: skew(0deg, 15deg);
 }
 .left .content {
@@ -42,4 +42,5 @@ span {
   text-transform: uppercase;
   line-height: 0.8;
   transition: ease-out 0.6s;
+  z-index: 1;
 }

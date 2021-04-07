@@ -6,7 +6,7 @@
 .wrapper {
   min-height: 100vh;
   min-width: 100vw;
-  background: #fcfcfc;
+  background: #1a1a1a;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -19,7 +19,7 @@
 }
 
 .sidebar {
-  width: calc(var(--sidebar-width) * 0.7);
+  width: calc(var(--sidebar-width) * 0.6);
   -webkit-transform: translateX(calc(var(--sidebar-width) * -1));
   transform: translateX(calc(var(--sidebar-width) * -1));
   background: radial-gradient(
@@ -81,7 +81,8 @@
 .menu__link:hover,
 .menu__link:focus,
 .menu__link:active {
-  color: #372f61;
+  //color: #372f61;
+  color: #fff;
   text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -103,7 +104,8 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 4px;
-    color: #000;
+    //color: #000;
+    color: #fff;
     position: absolute;
     right: -20px;
     -webkit-transform: translateX(100%);
@@ -115,7 +117,8 @@
 
 .menu_toggler__line {
   height: calc(var(--toggler-size) / 5);
-  background: #202020;
+  //background: #202020;
+  background: #fff;
   position: absolute;
   left: 0;
   right: 0;
@@ -142,7 +145,8 @@
   }
 }
 .input_toggler:checked ~ .menu_toggler .menu_toggler__line {
-  background: #202020;
+  //background: #202020;
+  background: #fff;
 }
 
 .input_toggler:checked ~ .menu_toggler .menu_toggler__line:nth-child(1) {
@@ -164,4 +168,40 @@
   -webkit-transform: translateX(0);
   transform: translateX(0);
   opacity: 0.98;
+}
+
+.contactButton {
+  color: #fff;
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  padding-bottom: 7px;
+  z-index: 10;
+  overflow: hidden;
+  &:hover {
+    &:before {
+      transform: translateX(0%);
+    }
+    &:after {
+      transform: translateX(120%);
+    }
+  }
+}
+
+.contactButton:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #fff;
+  -webkit-transition: -webkit-transform 0.4s ease;
+  transition: -webkit-transform 0.4s ease;
+  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, -webkit-transform 0.4s ease;
 }

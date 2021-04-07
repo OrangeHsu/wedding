@@ -43,7 +43,13 @@ const Layout = (props) => {
           </li>
         </ul>
       </aside>
-      <main className={styles.content}>{props.children}</main>
+      <a
+        href="https://longstoryshortdesign.co.uk/contact"
+        className={styles.contactButton}
+      >
+        Contact
+      </a>
+      <main className={`${styles.content} `}>{props.children}</main>
     </div>
   );
 };

@@ -2,14 +2,13 @@ import React, { lazy } from "react";
 import ReactDOM from "react-dom";
 import ReactFullpage from "@fullpage/react-fullpage";
 import styled from "styled-components";
-import styles from "./index.module.scss";
 
 const Title = lazy(() => import("../../page/title"));
 const url = (name, format, wrap = false) =>
   `${wrap ? "url(" : ""}build/assets/${name}.${format}${wrap ? ")" : ""}`;
 
 const UnicornAfter = styled.div`
-  &:after {
+  &:before {
     content: " ";
     display: block;
     position: absolute;
@@ -18,10 +17,110 @@ const UnicornAfter = styled.div`
     width: 100%;
     height: 100%;
     opacity: 0.6;
-    background-image: ${url("wedding", "jpg", true)};
+    background-image: ${url("wedding", "jpeg", true)};
     background-repeat: no-repeat;
     background-position: 50% 0;
     background-size: cover;
+  }
+`;
+
+const HomeSectionVideo = styled.div`
+  &:after {
+    right: 0;
+  }
+  &:before {
+    left: 0;
+  }
+  &:after,
+  &:before {
+    content: "";
+    position: absolute;
+    width: 20%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    height: 100%;
+    background: #111;
+    -webkit-transition: width 1s ease;
+    transition: width 1s ease;
+  }
+  .replay {
+    opacity: 0;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    top: 60px;
+  }
+  .video {
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  #intro-vid-wrap {
+    padding: 0 110px;
+    z-index: -1;
+    -webkit-transition: width 1s ease, opacity 0.5s ease;
+    transition: width 1s ease, opacity 0.5s ease;
+    opacity: 1;
+    width: 100%;
+    max-width: 80%;
+    height: 100%;
+    max-height: 700px;
+    @media (min-width: 1024px) {
+      padding: 0 !important;
+    }
+  }
+  &.active {
+    #intro-vid-wrap {
+      width: 100%;
+      max-width: 80%;
+      height: 100%;
+      max-height: 700px;
+    }
+
+    &:before,
+    &:after {
+      width: 10%;
+      -webkit-transition: width 1s ease;
+      transition: width 1s ease;
+    }
+  }
+  #intro-vid {
+    width: 100%;
+    height: 100%;
+  }
+  .previous-section {
+    #intro-vid-wrap {
+      padding: 0 110px;
+      position: fixed;
+      width: 100%;
+      max-width: 80%;
+      height: 100%;
+      max-height: 700px;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      margin: 0;
+      opacity: 0.02;
+      -webkit-transition: opacity 0.5s ease, top 0.5s ease;
+      transition: opacity 0.5s ease, top 0.5s ease;
+    }
   }
 `;
 
@@ -32,42 +131,46 @@ const Fullpage = () => (
     render={({ state, fullpageApi }) => {
       return (
         <ReactFullpage.Wrapper>
-          <div className="section">
-            <Title></Title>
-          </div>
           <div
             className="section"
             style={{
-              marginTop: "-400px",
               display: "flex",
               justifyContent: "center",
               height: "100%",
               zIndex: -1,
             }}
           >
-            <UnicornAfter></UnicornAfter>
+            <UnicornAfter>
+              <Title></Title>
+            </UnicornAfter>
           </div>
-          <div className={`section ${styles.home_section_video}`}>
-            <h4 className={styles.replay}>
-              <a href="#">Replay video</a>
-            </h4>
-            <div className={styles.video} id="intro-vid-wrap">
-              <video
-                id="intro-vid"
-                muted="true"
-                loop=""
-                playsinline=""
-                autoplay="false"
-                autostart="false"
-              >
-                <source
-                  src="https://player.vimeo.com/external/312121146.hd.mp4?s=22133b7a86815fef2c891affe590435232390636&amp;profile_id=174"
-                  type="video/mp4"
-                />
-                Your browser does not support the video tag.
-              </video>
+
+          <HomeSectionVideo
+            className={`section`}
+            style={{ marginTop: "-160px" }}
+          >
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <h4 className={"replay"}>
+                <a href="#">Replay video</a>
+              </h4>
+              <div className={"video"} id="intro-vid-wrap">
+                <video
+                  id="intro-vid"
+                  muted="true"
+                  loop=""
+                  playsinline=""
+                  autoplay="false"
+                  autostart="false"
+                >
+                  <source
+                    src="https://player.vimeo.com/external/312121146.hd.mp4?s=22133b7a86815fef2c891affe590435232390636&amp;profile_id=174"
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
             </div>
-          </div>
+          </HomeSectionVideo>
         </ReactFullpage.Wrapper>
       );
     }}

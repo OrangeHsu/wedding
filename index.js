@@ -3,6 +3,8 @@ import "react-hot-loader/patch";
 import React from "react";
 import { render } from "react-dom";
 import App from "src/App";
+//Stylesheets
+import "./src/components/Fullpage/index.module.scss";
 
 const load = (Component) => {
   render(
