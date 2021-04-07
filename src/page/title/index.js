@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useEffect } from "react";
+import React, { useState, useCallback, useMemo, useEffect, lazy } from "react";
 import { Typography, Card, Form, Input, Button } from "antd";
 import styles from "./index.module.scss";
 
@@ -33,11 +33,7 @@ function Login({ history }) {
     };
   }, []);
   return (
-    <div
-      style={{
-        height: "100vh",
-      }}
-    >
+    <div>
       <div className={styles.wrap}>
         <div className={styles.line}>
           <div className={styles.left}>
@@ -72,13 +68,15 @@ function Login({ history }) {
           </div>
         </div>
       </div>
-      <div
+      {/* <div
         className={styles.imgBox}
         style={{
           backgroundImage: url("wedding", "jpg", true),
           backgroundSize: "cover",
+          height: "100vh",
+          width: "100vw",
         }}
-      ></div>
+      ></div> */}
     </div>
   );
 }

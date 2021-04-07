@@ -6,9 +6,15 @@ import { ConfigProvider, Layout, Skeleton } from "antd";
 import zhCN from "antd/es/locale/zh_CN";
 import styled from "styled-components";
 
-const StyledLayout = styled(Layout)``;
+const StyledLayout = styled(Layout)`
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  font-family: "Roboto";
+`;
 
-const Login = lazy(() => import("src/page/login"));
+const PageLayout = lazy(() => import("src/components/Layout"));
 const System = lazy(() => import("src/components/System"));
 const Fullpage = lazy(() => import("src/components/Fullpage"));
 
@@ -18,11 +24,12 @@ const App = () => {
       <Router>
         <StyledLayout>
           <Suspense fallback={<Skeleton loading={true} active />}>
-            <Switch>
-              <Route exact path="/page/" component={Fullpage} />
-              <Route exact path="/login/" component={Login} />
-              <Route path="/" component={Login} />
-            </Switch>
+            <PageLayout>
+              <Switch>
+                <Route exact path="/page/" component={System} />
+                <Route path="/" component={Fullpage} />
+              </Switch>
+            </PageLayout>
           </Suspense>
         </StyledLayout>
       </Router>

@@ -103,10 +103,7 @@ module.exports = (env) => {
         },
         {
           test: /\.(gif|png|jpe?g|svg)$/,
-          use: [
-            "file-loader?hash=sha512&digest=hex&name=build/images/[hash].[ext]",
-            "image-webpack-loader",
-          ],
+          use: ["file-loader", "image-webpack-loader"],
         },
         {
           test: /\.s[ac]ss$/i,
