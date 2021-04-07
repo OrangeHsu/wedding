@@ -108,11 +108,7 @@ module.exports = (env) => {
         {
           test: /\.s[ac]ss$/i,
           // 把 sass-loader 放在首要處理 (第一步)
-          use: [
-            MiniCssExtractPlugin.loader,
-            "css-loader?modules=true&camelCase=true",
-            "sass-loader",
-          ],
+          use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
         },
       ],
     },
