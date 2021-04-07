@@ -81,8 +81,7 @@
 .menu__link:hover,
 .menu__link:focus,
 .menu__link:active {
-  //color: #372f61;
-  color: #fff;
+  color: #372f61;
   text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -139,32 +138,32 @@
   position: absolute;
   left: -100%;
 }
-.input_toggler:checked ~ .menu_toggler {
+.input_toggler.checked ~ .menu_toggler {
   &:after {
     display: none;
   }
 }
-.input_toggler:checked ~ .menu_toggler .menu_toggler__line {
+.input_toggler.checked ~ .menu_toggler .menu_toggler__line {
   //background: #202020;
   background: #fff;
 }
 
-.input_toggler:checked ~ .menu_toggler .menu_toggler__line:nth-child(1) {
+.input_toggler.checked ~ .menu_toggler .menu_toggler__line:nth-child(1) {
   -webkit-transform: translateY(calc(var(--toggler-size) / 5 * 2)) rotate(45deg);
   transform: translateY(calc(var(--toggler-size) / 5 * 2)) rotate(45deg);
 }
 
-.input_toggler:checked ~ .menu_toggler .menu_toggler__line:nth-child(2) {
+.input_toggler.checked ~ .menu_toggler .menu_toggler__line:nth-child(2) {
   opacity: 0;
 }
 
-.input_toggler:checked ~ .menu_toggler .menu_toggler__line:nth-child(3) {
+.input_toggler.checked ~ .menu_toggler .menu_toggler__line:nth-child(3) {
   -webkit-transform: translateY(calc(var(--toggler-size) / 5 * -2))
     rotate(-45deg);
   transform: translateY(calc(var(--toggler-size) / 5 * -2)) rotate(-45deg);
 }
 
-.input_toggler:checked ~ .sidebar {
+.input_toggler.checked ~ .sidebar {
   -webkit-transform: translateX(0);
   transform: translateX(0);
   opacity: 0.98;

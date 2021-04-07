@@ -15,8 +15,11 @@ const StyledLayout = styled(Layout)`
 `;
 
 const PageLayout = lazy(() => import("src/components/Layout"));
-const System = lazy(() => import("src/components/System"));
 const Fullpage = lazy(() => import("src/components/Fullpage"));
+const Story = lazy(() => import("src/components/Story"));
+const Events = lazy(() => import("src/components/Events"));
+const Photo = lazy(() => import("src/components/Photo"));
+const Contact = lazy(() => import("src/components/Contact"));
 
 const App = () => {
   return (
@@ -26,7 +29,10 @@ const App = () => {
           <Suspense fallback={<Skeleton loading={true} active />}>
             <PageLayout>
               <Switch>
-                <Route exact path="/page/" component={System} />
+                <Route exact path="/contact/" component={Contact} />
+                <Route exact path="/photo/" component={Photo} />
+                <Route exact path="/events/" component={Events} />
+                <Route exact path="/story/" component={Story} />
                 <Route path="/" component={Fullpage} />
               </Switch>
             </PageLayout>

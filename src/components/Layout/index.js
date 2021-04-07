@@ -1,15 +1,24 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useCallback } from "react";
 import styles from "./index.module.scss";
+import { Link } from "react-router-dom";
 
 const Layout = (props) => {
+  const [toggle, setToggle] = useState(false);
+  const handleClick = useCallback(() => {
+    setToggle(!toggle);
+  });
   return (
     <div className={styles.wrapper}>
       <input
         type="checkbox"
         id="menuToggler"
-        className={`${styles.input_toggler}`}
+        className={`${styles.input_toggler} ${toggle ? styles.checked : ""}`}
       />
-      <label htmlFor="menuToggler" className={styles.menu_toggler}>
+      <label
+        htmlFor="menuToggler"
+        className={styles.menu_toggler}
+        onClick={handleClick}
+      >
         <span className={styles.menu_toggler__line}></span>
         <span className={styles.menu_toggler__line}></span>
         <span className={styles.menu_toggler__line}></span>
@@ -17,36 +26,43 @@ const Layout = (props) => {
       <aside className={styles.sidebar}>
         <ul className={styles.menu}>
           <li className={styles.menu__item}>
-            <a className={styles.menu__link} href="#">
+            <Link className={styles.menu__link} to="/#">
               Home
-            </a>
+            </Link>
           </li>
           <li className={styles.menu__item}>
-            <a className={styles.menu__link} href="#">
-              Album 1
-            </a>
+            <Link className={styles.menu__link} to="/events">
+              Events
+            </Link>
           </li>
           <li className={styles.menu__item}>
-            <a className={styles.menu__link} href="#">
-              Album 2
-            </a>
+            <Link className={styles.menu__link} to="/story">
+              Our Story
+            </Link>
           </li>
           <li className={styles.menu__item}>
-            <a className={styles.menu__link} href="#">
-              Album 3
-            </a>
+            <Link className={styles.menu__link} to="/photo">
+              Photo
+            </Link>
           </li>
           <li className={styles.menu__item}>
-            <a className={styles.menu__link} href="#">
+            <Link className={styles.menu__link} to="/contact">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
       </aside>
-      <a href="#" className={styles.contactButton}>
+      <Link to="/contact" className={styles.contactButton}>
         Contact
-      </a>
-      <main className={`${styles.content} `}>{props.children}</main>
+      </Link>
+      <main
+        className={`${styles.content} `}
+        onClick={() => {
+          setToggle(false);
+        }}
+      >
+        {props.children}
+      </main>
     </div>
   );
 };

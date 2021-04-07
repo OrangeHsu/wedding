@@ -134,7 +134,7 @@ const HomeSectionVideo = styled.div`
     }
   }
 `;
-function Fullpage({ history }) {
+const Fullpage = (props) => {
   const videoRef = useRef(null);
   //   const playVideo = useCallback(() => {
   //     videoRef.current.pause();
@@ -147,7 +147,6 @@ function Fullpage({ history }) {
       videoRef.current.pause();
     }
     if (destination.index == 1) {
-      console.log(videoRef.current.currentTime);
       videoRef.current.play();
     }
   });
@@ -181,11 +180,11 @@ function Fullpage({ history }) {
                 <div className={"video"} id="intro-vid-wrap">
                   <video
                     id="intro-vid"
-                    muted="true"
-                    loop="true"
-                    playsinline="true"
-                    autoplay="false"
-                    autostart="false"
+                    muted={true}
+                    loop={true}
+                    playsInline={true}
+                    autoPlay={false}
+                    autoStart={false}
                     ref={videoRef}
                   >
                     <source
@@ -202,5 +201,5 @@ function Fullpage({ history }) {
       }}
     />
   );
-}
+};
 export default Fullpage;
