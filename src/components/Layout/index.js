@@ -43,10 +43,7 @@ const Layout = (props) => {
           </li>
         </ul>
       </aside>
-      <a
-        href="https://longstoryshortdesign.co.uk/contact"
-        className={styles.contactButton}
-      >
+      <a href="#" className={styles.contactButton}>
         Contact
       </a>
       <main className={`${styles.content} `}>{props.children}</main>

@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { lazy, useRef, useCallback } from "react";
 import ReactDOM from "react-dom";
 import ReactFullpage from "@fullpage/react-fullpage";
 import styled from "styled-components";
@@ -46,7 +46,6 @@ const HomeSectionVideo = styled.div`
     transition: width 1s ease;
   }
   .replay {
-    opacity: 0;
     color: #fff;
     position: absolute;
     left: 50%;
@@ -54,6 +53,18 @@ const HomeSectionVideo = styled.div`
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);
     top: 60px;
+    &:a:after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 0%;
+      height: 1px;
+      background: #fff;
+      opacity: 0;
+      -webkit-transition: width 0.3s;
+      transition: width 0.3s;
+    }
   }
   .video {
     display: -webkit-flex;
@@ -123,57 +134,73 @@ const HomeSectionVideo = styled.div`
     }
   }
 `;
+function Fullpage({ history }) {
+  const videoRef = useRef(null);
+  //   const playVideo = useCallback(() => {
+  //     videoRef.current.pause();
+  //     videoRef.current.currentTime = "0";
+  //     videoRef.current.play();
+  //   });
 
-const Fullpage = () => (
-  <ReactFullpage
-    //fullpage options
-    scrollingSpeed={1000} /* Options here */
-    render={({ state, fullpageApi }) => {
-      return (
-        <ReactFullpage.Wrapper>
-          <div
-            className="section"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              height: "100%",
-              zIndex: -1,
-            }}
-          >
-            <UnicornAfter>
-              <Title></Title>
-            </UnicornAfter>
-          </div>
-
-          <HomeSectionVideo
-            className={`section`}
-            style={{ marginTop: "-160px" }}
-          >
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <h4 className={"replay"}>
-                <a href="#">Replay video</a>
-              </h4>
-              <div className={"video"} id="intro-vid-wrap">
-                <video
-                  id="intro-vid"
-                  muted="true"
-                  loop=""
-                  playsinline=""
-                  autoplay="false"
-                  autostart="false"
-                >
-                  <source
-                    src="https://player.vimeo.com/external/312121146.hd.mp4?s=22133b7a86815fef2c891affe590435232390636&amp;profile_id=174"
-                    type="video/mp4"
-                  />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+  const fullPageAfterLoad = useCallback((origin, destination, direction) => {
+    if (destination.index == 0) {
+      videoRef.current.pause();
+    }
+    if (destination.index == 1) {
+      console.log(videoRef.current.currentTime);
+      videoRef.current.play();
+    }
+  });
+  return (
+    <ReactFullpage
+      //fullpage options
+      scrollingSpeed={1000} /* Options here */
+      afterLoad={fullPageAfterLoad}
+      render={({ state, fullpageApi }) => {
+        return (
+          <ReactFullpage.Wrapper>
+            <div
+              className="section"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                height: "100%",
+                zIndex: -1,
+              }}
+            >
+              <UnicornAfter>
+                <Title></Title>
+              </UnicornAfter>
             </div>
-          </HomeSectionVideo>
-        </ReactFullpage.Wrapper>
-      );
-    }}
-  />
-);
+
+            <HomeSectionVideo
+              className={`section`}
+              style={{ marginTop: "-160px" }}
+            >
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <div className={"video"} id="intro-vid-wrap">
+                  <video
+                    id="intro-vid"
+                    muted="true"
+                    loop="true"
+                    playsinline="true"
+                    autoplay="false"
+                    autostart="false"
+                    ref={videoRef}
+                  >
+                    <source
+                      src="https://player.vimeo.com/external/312121146.hd.mp4?s=22133b7a86815fef2c891affe590435232390636&amp;profile_id=174"
+                      type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+            </HomeSectionVideo>
+          </ReactFullpage.Wrapper>
+        );
+      }}
+    />
+  );
+}
 export default Fullpage;
