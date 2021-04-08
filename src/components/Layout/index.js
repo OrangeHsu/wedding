@@ -55,6 +55,7 @@ const Layout = (props) => {
       <Link to="/contact" className={styles.contactButton}>
         Contact
       </Link>
+
       <main
         className={`${styles.content} `}
         onClick={() => {

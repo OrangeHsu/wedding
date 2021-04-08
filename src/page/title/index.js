@@ -68,15 +68,6 @@ function Login({ history }) {
           </div>
         </div>
       </div>
-      {/* <div
-        className={styles.imgBox}
-        style={{
-          backgroundImage: url("wedding", "jpg", true),
-          backgroundSize: "cover",
-          height: "100vh",
-          width: "100vw",
-        }}
-      ></div> */}
     </div>
   );
 }

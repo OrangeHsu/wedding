@@ -1,8 +1,7 @@
-import React, { lazy, useRef, useCallback } from "react";
+import React, { lazy, useRef, useCallback, useState } from "react";
 import ReactDOM from "react-dom";
 import ReactFullpage from "@fullpage/react-fullpage";
 import styled from "styled-components";
-
 const Title = lazy(() => import("../../page/title"));
 const url = (name, format, wrap = false) =>
   `${wrap ? "url(" : ""}build/assets/${name}.${format}${wrap ? ")" : ""}`;
@@ -134,13 +133,61 @@ const HomeSectionVideo = styled.div`
     }
   }
 `;
+
+const PaginationLines = styled.ul`
+  display: none;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  opacity: 1;
+  position: fixed;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out;
+  z-index: 7;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+  a {
+    width: 3px;
+    height: 100%;
+    min-height: 20px;
+    display: block;
+    margin-left: auto;
+    position: relative;
+    -webkit-transition: 0.3s ease background;
+    transition: 0.3s ease background;
+    &.active,
+    &:active,
+    &:hover {
+      background: #fff;
+    }
+  }
+`;
 const Fullpage = (props) => {
   const videoRef = useRef(null);
-  //   const playVideo = useCallback(() => {
-  //     videoRef.current.pause();
-  //     videoRef.current.currentTime = "0";
-  //     videoRef.current.play();
-  //   });
+  const [pageSection, setPageSection] = useState(0);
 
   const fullPageAfterLoad = useCallback((origin, destination, direction) => {
     if (destination.index == 0) {
@@ -150,11 +197,15 @@ const Fullpage = (props) => {
       videoRef.current.play();
     }
   });
+  const fullPageOnLeave = useCallback((origin, destination, direction) => {
+    setPageSection(destination.index);
+  });
   return (
     <ReactFullpage
       //fullpage options
       scrollingSpeed={1000} /* Options here */
       afterLoad={fullPageAfterLoad}
+      onLeave={fullPageOnLeave}
       render={({ state, fullpageApi }) => {
         return (
           <ReactFullpage.Wrapper>
@@ -184,7 +235,6 @@ const Fullpage = (props) => {
                     loop={true}
                     playsInline={true}
                     autoPlay={false}
-                    autoStart={false}
                     ref={videoRef}
                   >
                     <source
@@ -196,6 +246,17 @@ const Fullpage = (props) => {
                 </div>
               </div>
             </HomeSectionVideo>
+            <PaginationLines>
+              {state &&
+                [...Array(state.sectionCount)].map((x, i) => (
+                  <li key={i}>
+                    <a
+                      href={`#home-${i}`}
+                      className={pageSection === i ? "active" : ""}
+                    ></a>
+                  </li>
+                ))}
+            </PaginationLines>
           </ReactFullpage.Wrapper>
         );
       }}
