@@ -1,8 +1,10 @@
-import React, { lazy, useRef, useCallback, useState } from "react";
+import React, { lazy, useRef, useCallback, useState, useMemo } from "react";
 import ReactDOM from "react-dom";
 import ReactFullpage from "@fullpage/react-fullpage";
 import styled from "styled-components";
+
 const Title = lazy(() => import("../../page/title"));
+
 const url = (name, format, wrap = false) =>
   `${wrap ? "url(" : ""}build/assets/${name}.${format}${wrap ? ")" : ""}`;
 
@@ -188,6 +190,7 @@ const PaginationLines = styled.ul`
 const Fullpage = (props) => {
   const videoRef = useRef(null);
   const [pageSection, setPageSection] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
 
   const fullPageAfterLoad = useCallback((origin, destination, direction) => {
     if (destination.index == 0) {
@@ -200,67 +203,191 @@ const Fullpage = (props) => {
   const fullPageOnLeave = useCallback((origin, destination, direction) => {
     setPageSection(destination.index);
   });
-  return (
-    <ReactFullpage
-      //fullpage options
-      scrollingSpeed={1000} /* Options here */
-      afterLoad={fullPageAfterLoad}
-      onLeave={fullPageOnLeave}
-      render={({ state, fullpageApi }) => {
-        return (
-          <ReactFullpage.Wrapper>
-            <div
-              className="section"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                height: "100%",
-                zIndex: -1,
-              }}
-            >
-              <UnicornAfter>
-                <Title></Title>
-              </UnicornAfter>
-            </div>
 
-            <HomeSectionVideo
-              className={`section`}
-              style={{ marginTop: "-160px" }}
-            >
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <div className={"video"} id="intro-vid-wrap">
-                  <video
-                    id="intro-vid"
-                    muted={true}
-                    loop={true}
-                    playsInline={true}
-                    autoPlay={false}
-                    ref={videoRef}
-                  >
-                    <source
-                      src="https://player.vimeo.com/external/312121146.hd.mp4?s=22133b7a86815fef2c891affe590435232390636&amp;profile_id=174"
-                      type="video/mp4"
-                    />
-                    Your browser does not support the video tag.
-                  </video>
+  const getSectionCount = useCallback((state, fullpageApi) => {
+    setTotalPage(state.sectionCount);
+  });
+
+  const projectContent = useMemo(() => {
+    const contentArr = {
+      2: { url: "", title: "HI AAA", text: "AAA", color: "rgb(194, 216, 199)" },
+      3: { url: "", title: "HI BBB", text: "BBB", color: "rgb(99, 0, 26)" },
+    };
+    return contentArr[pageSection]
+      ? contentArr[pageSection]
+      : { url: "", title: "", text: "", color: "" };
+  }, [pageSection]);
+  return (
+    <div>
+      <ReactFullpage
+        //fullpage options
+        scrollingSpeed={1000} /* Options here */
+        afterLoad={fullPageAfterLoad}
+        onLeave={fullPageOnLeave}
+        licenseKey="OPEN-SOURCE-GPLV3-LICENSE"
+        render={({ state, fullpageApi }) => {
+          getSectionCount(state, fullpageApi);
+          return (
+            <ReactFullpage.Wrapper>
+              <div
+                className="section"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  height: "100%",
+                  zIndex: -1,
+                }}
+              >
+                <UnicornAfter>
+                  <Title></Title>
+                </UnicornAfter>
+              </div>
+
+              <HomeSectionVideo
+                className={`section`}
+                style={{ marginTop: "-110px" }}
+              >
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div className={"video"} id="intro-vid-wrap">
+                    <video
+                      id="intro-vid"
+                      muted={true}
+                      loop={true}
+                      playsInline={true}
+                      autoPlay={false}
+                      ref={videoRef}
+                    >
+                      <source
+                        src="https://player.vimeo.com/external/312121146.hd.mp4?s=22133b7a86815fef2c891affe590435232390636&amp;profile_id=174"
+                        type="video/mp4"
+                      />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+              </HomeSectionVideo>
+
+              <div className={`section projects`}>
+                <div
+                  className={`project_item`}
+                  id="section4"
+                  style={{
+                    color: "#fff",
+                    height: "658px",
+                    backgroundColor: projectContent.color,
+                  }}
+                >
+                  <span className={`right_border`}></span>
+                  <div
+                    className={`project_img view_project`}
+                    style={{
+                      backgroundImage: `${url(
+                        "mc-saatchi-hero-home",
+                        "jpeg",
+                        true
+                      )}`,
+                    }}
+                    href="https://longstoryshortdesign.co.uk/projects/mc-saatchi"
+                  ></div>
                 </div>
               </div>
-            </HomeSectionVideo>
-            <PaginationLines>
-              {state &&
-                [...Array(state.sectionCount)].map((x, i) => (
-                  <li key={i}>
-                    <a
-                      href={`#home-${i}`}
-                      className={pageSection === i ? "active" : ""}
-                    ></a>
-                  </li>
-                ))}
-            </PaginationLines>
-          </ReactFullpage.Wrapper>
-        );
-      }}
-    />
+
+              <div className={`section projects`}>
+                <div
+                  className={`project_item`}
+                  id="section4"
+                  style={{
+                    color: "#fff",
+                    height: "658px",
+                    backgroundColor: projectContent.color,
+                  }}
+                >
+                  <div
+                    className={`project_img view_project`}
+                    style={{
+                      backgroundImage: `${url("npro-hero-1", "jpeg", true)}`,
+                    }}
+                    href="https://longstoryshortdesign.co.uk/projects/mc-saatchi"
+                  ></div>
+                </div>
+              </div>
+            </ReactFullpage.Wrapper>
+          );
+        }}
+      />
+      <PaginationLines>
+        {totalPage &&
+          [...Array(totalPage)].map((x, i) => (
+            <li key={i}>
+              <a
+                href={`#home-${i}`}
+                className={`
+              ${pageSection === i ? "active" : ""}
+              `}
+              ></a>
+            </li>
+          ))}
+      </PaginationLines>
+      <div
+        className="projectBar"
+        style={{ backgroundColor: projectContent.color }}
+      ></div>
+      <span
+        className={`projectBorder`}
+        style={{ backgroundColor: projectContent.color }}
+      ></span>
+      <div
+        className={`projectBorderLeft ${
+          projectContent.color !== "" ? "active" : ""
+        }`}
+        style={{ backgroundColor: projectContent.color, color: "#fff" }}
+      >
+        <div className={`project_info`}>
+          <div className={`project_info_wrap`}>
+            <h2>
+              <a href={projectContent.url} className="view-project">
+                {projectContent.title}
+              </a>
+            </h2>
+            <p>{projectContent.text}</p>
+            <a
+              className={`view_project view_project_button new_button`}
+              href={projectContent.url}
+            >
+              View Project
+              <span>
+                <svg viewBox="0 0 49.5 10.06">
+                  <line
+                    className="a"
+                    y1="5.03"
+                    x2="48.3"
+                    y2="5.03"
+                    stroke="#fff"
+                  ></line>
+                  <path
+                    className="b"
+                    d="M41.46,9.83a.49.49,0,0,1,.16-.69L48.07,5,41.62.92a.49.49,0,0,1-.16-.69.5.5,0,0,1,.69-.15l7.12,4.53a.5.5,0,0,1,0,.84L42.15,10a.42.42,0,0,1-.26.08A.51.51,0,0,1,41.46,9.83Z"
+                  ></path>
+                </svg>
+                <svg className="second_arrow" viewBox="0 0 49.5 10.06">
+                  <line
+                    className="a"
+                    y1="5.03"
+                    x2="48.3"
+                    y2="5.03"
+                    stroke="#fff"
+                  ></line>
+                  <path
+                    className="b"
+                    d="M41.46,9.83a.49.49,0,0,1,.16-.69L48.07,5,41.62.92a.49.49,0,0,1-.16-.69.5.5,0,0,1,.69-.15l7.12,4.53a.5.5,0,0,1,0,.84L42.15,10a.42.42,0,0,1-.26.08A.51.51,0,0,1,41.46,9.83Z"
+                  ></path>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 export default Fullpage;

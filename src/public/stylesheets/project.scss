@@ -1,0 +1,296 @@
+.projects {
+  overflow: hidden;
+  position: relative;
+  -webkit-transition: background-color 0.4s ease;
+  transition: background-color 0.4s ease;
+  z-index: 4;
+  &.active {
+    .project_item {
+      z-index: 3;
+    }
+  }
+  .project_item {
+    background-color: inherit;
+    position: relative;
+
+    &:before {
+      top: 0;
+    }
+    &:after {
+      bottom: 0;
+    }
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      height: 145px;
+      right: 0;
+      background-color: inherit;
+      width: 100%;
+      z-index: 5;
+      -webkit-transition: height 0.4s ease;
+      transition: height 0.4s ease;
+    }
+
+    .right_border {
+      height: 100vh;
+      width: 145px;
+      background-color: inherit;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 6;
+      -webkit-transition: width 0.4s ease;
+      transition: width 0.4s ease;
+    }
+    .back_arrow {
+      display: none;
+      position: fixed;
+      left: 40px;
+      top: 40px;
+      z-index: 5;
+      background: #1a1a1a;
+      padding: 20px 17px 20px 23px;
+    }
+
+    .project_img {
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100vh;
+      position: relative;
+      background-position: 50%;
+      right: 0;
+      margin-left: auto;
+      -webkit-transition: right 0.4s ease-out, width 0.4s ease, height 0.4s ease;
+      transition: right 0.4s ease-out, width 0.4s ease, height 0.4s ease;
+      &.view_project {
+        cursor: pointer;
+      }
+    }
+  }
+  .project_content {
+    display: none;
+    background: #fff;
+    color: #1a1a1a;
+  }
+  .project_content + .section_cta {
+    display: none;
+  }
+}
+.section_cta {
+  display: _webkit_flex;
+  display: _webkit_box;
+  display: _ms_flexbox;
+  display: flex;
+
+  align-items: center;
+
+  padding: 0;
+  text-align: center;
+  z-index: 7;
+  position: relative;
+  max-height: 100vh;
+}
+
+.new_button {
+  padding: 12px 17px;
+  border: 1px solid #fff;
+  display: inline-block;
+  margin-top: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  font-family: proxima nova w15;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+
+  span {
+    overflow: hidden;
+    margin-left: 15px;
+    display: inline-block;
+    position: relative;
+  }
+  svg {
+    overflow: hidden;
+    vertical-align: middle;
+
+    width: 40px;
+    display: inline-block;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    .a {
+      fill: none;
+      stroke: #fff;
+      stroke-miterlimit: 10;
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+    }
+    .b {
+      fill: #fff;
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+    }
+    &.second_arrow {
+      position: absolute;
+      -webkit-transform: translateX(-250%);
+      -ms-transform: translateX(-250%);
+      transform: translateX(-250%);
+      top: 40%;
+    }
+  }
+
+  &:hover {
+    svg {
+      -webkit-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      transform: translateX(100%);
+      &.second_arrow {
+        -webkit-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        transform: translateX(-100%);
+      }
+    }
+  }
+}
+@media (min-width: 992px) {
+  .projects .project_item .project_img {
+    width: calc(60% - 145px);
+    margin-right: 145px;
+  }
+}
+
+.projectBar {
+  width: 100vw;
+  height: 100vh;
+}
+
+.projectBar:before,
+.projectBar:after {
+  position: fixed;
+}
+
+.projectBar:before,
+.projectBar:after {
+  content: "";
+  position: absolute;
+  height: 145px;
+  right: 0;
+  background-color: inherit;
+  width: 100%;
+  z-index: 5;
+  -webkit-transition: all 0.4s linear;
+  transition: all 0.4s linear;
+}
+
+.projectBar:before {
+  top: 0;
+}
+.projectBar:after {
+  bottom: 0;
+}
+.projectBorder {
+  height: 100vh;
+  width: 145px;
+  background-color: inherit;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 6;
+  -webkit-transition: all 0.4s linear;
+  transition: all 0.4s linear;
+}
+.projectBorderLeft {
+  @extend .projectBorder;
+  opacity: 0;
+  visibility: hidden;
+  left: 0;
+  width: 40%;
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    .project_info {
+      visibility: visible;
+      opacity: 1;
+      top: 41%;
+      -webkit-transition: top 0.25s ease_out 0.25s, opacity 0.25s ease_out 0.25s,
+        left 0.4s ease_in, visibility 0.25s ease_out 0.25s;
+      transition: top 0.25s ease_out 0.25s, opacity 0.25s ease_out 0.25s,
+        left 0.4s ease_in, visibility 0.25s ease_out 0.25s;
+    }
+  }
+  .project_info {
+    opacity: 0;
+    visibility: hidden;
+    top: 50%;
+    -webkit-transition: top 0.25s ease_out 0.25s, opacity 0.25s ease_out 0.25s,
+      visibility 0.25s ease_out 0.25s;
+    transition: top 0.25s ease_out 0.25s, opacity 0.25s ease_out 0.25s,
+      visibility 0.25s ease_out 0.25s;
+  }
+  .project_info {
+    width: 100%;
+    position: fixed;
+    position: absolute;
+    display: _webkit_flex;
+    display: _webkit_box;
+    display: _ms_flexbox;
+    display: flex;
+    z-index: 6;
+    .project_info_wrap {
+      display: -webkit-flex;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-justify-content: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-flex-direction: column;
+      /* -webkit-box-orient: vertical; */
+      /* -webkit-box-direction: normal; */
+      -ms-flex-direction: column;
+      /* flex-direction: column; */
+      /* -webkit-align-items: center; */
+      /* -webkit-box-align: center; */
+      -ms-flex-align: center;
+      align-items: center;
+      justify-self: center;
+      height: 100%;
+      padding: 20px 80px;
+      margin: 0 20px;
+      text-align: center;
+      width: 100%;
+
+      p {
+        margin-bottom: 0;
+      }
+      a {
+        color: inherit;
+      }
+      h2 {
+        font-size: 2.118rem;
+        line-height: 2.706rem;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        margin-top: 0;
+        line-height: 100%;
+      }
+    }
+  }
+}
+.projects .project-item:before,
+.projects .project-item:after,
+.projects .project-item .right-border {
+  position: fixed;
+}

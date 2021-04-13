@@ -29,18 +29,27 @@
 .left .content {
   width: 100vw;
   text-align: center;
+  span {
+    display: inline-block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 10vw;
+    text-transform: uppercase;
+    line-height: 0.8;
+    transition: ease-out 0.6s;
+    z-index: 1;
+  }
 }
 .right .content {
   width: 100vw;
   text-align: center;
   transform: translate(-50vw);
-}
-span {
-  display: inline-block;
-  font-family: "Montserrat", sans-serif;
-  font-size: 10vw;
-  text-transform: uppercase;
-  line-height: 0.8;
-  transition: ease-out 0.6s;
-  z-index: 1;
+  span {
+    display: inline-block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 10vw;
+    text-transform: uppercase;
+    line-height: 0.8;
+    transition: ease-out 0.6s;
+    z-index: 1;
+  }
 }

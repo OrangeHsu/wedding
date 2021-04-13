@@ -105,10 +105,20 @@ module.exports = (env) => {
           test: /\.(gif|png|jpe?g|svg)$/,
           use: ["file-loader", "image-webpack-loader"],
         },
+
         {
           test: /\.s[ac]ss$/i,
-          // 把 sass-loader 放在首要處理 (第一步)
-          use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+          use: [
+            "style-loader",
+            "css-loader",
+            {
+              loader: "sass-loader",
+              options: {
+                // Prefer `dart-sass`
+                implementation: require("sass"),
+              },
+            },
+          ],
         },
       ],
     },
@@ -160,7 +170,15 @@ module.exports = (env) => {
               comments: false,
             },
           },
-          exclude: [/\.min\.js$/gi], // skip pre-minified libs
+          exclude: [
+            /\.min\.js$/gi,
+            /\.html$/,
+            /\.(js|jsx)$/,
+            /\.css$/,
+            /\.json$/,
+            /\.svg$/,
+            /\.scss$/, //Add this line
+          ],
         }),
       ],
     },

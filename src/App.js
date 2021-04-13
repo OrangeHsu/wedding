@@ -6,6 +6,8 @@ import { ConfigProvider, Layout, Skeleton } from "antd";
 import zhCN from "antd/es/locale/zh_CN";
 import styled from "styled-components";
 
+import "./public/stylesheets/style.scss";
+
 const StyledLayout = styled(Layout)`
   padding: 0;
   margin: 0;
