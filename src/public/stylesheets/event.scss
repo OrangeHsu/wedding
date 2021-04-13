@@ -1,0 +1,341 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
+
+@import url("https://fonts.googleapis.com/css?family=Eczar:800|Roboto+Mono");
+
+@import url("https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css");
+
+$animation-duration: 10s;
+$blue: #fff;
+
+.events-wrapper {
+  color: #000;
+  background: #000;
+  width: 100%;
+  height: 100%;
+}
+.page {
+  width: 100%;
+  padding: 100px 20px;
+  margin: 0px auto;
+  font-family: "cwTeXFangSong", "Roboto Mono", monospace;
+
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    .card {
+      border-radius: 4px;
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      width: 481px;
+      height: 529px;
+      background: rgba(255, 255, 255, 0.938);
+      margin: auto;
+      padding: 40px;
+      transition: all 2s ease;
+      transform-style: preserve-3d;
+      animation: card-isometric $animation-duration infinite;
+
+      &-layer {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        &-1 {
+          transform: translateX(0px) translateY(0) translateZ(30px);
+          //background: rgba($blue, 0.6);
+          background-image: url("../../../build/assets/metal_frame.png");
+          background-size: contain;
+          background-repeat: no-repeat;
+          opacity: 0.6;
+          border: 2px solid rgba($blue, 0.5);
+        }
+        &-2 {
+          transform: translateX(0px) translateY(0) translateZ(60px);
+          //background: rgba($blue, 0.4);
+          background-image: url("../../../build/assets/metal_frame.png");
+          background-size: contain;
+          background-repeat: no-repeat;
+          opacity: 0.4;
+          border: 2px solid rgba($blue, 0.5);
+        }
+        &-3 {
+          transform: translateX(0px) translateY(0) translateZ(90px);
+          background: rgba($blue, 0.2);
+          //   background-image: url("../../../build/assets/metal_frame.png");
+          //   background-size: contain;
+          //   background-repeat: no-repeat;
+          opacity: 0.2;
+          border: 2px solid rgba($blue, 0.5);
+        }
+      }
+
+      .bank {
+        font-family: "Eczar", serif;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        text-align: right;
+        font-size: 1em;
+        font-weight: bold;
+        line-height: 1em;
+
+        transform: translateX(-50%) translateY(-50%) translateZ(65px);
+      }
+
+      //   .chip {
+      //     position: absolute;
+      //     left: 40px;
+      //     top: 40px;
+      //     width: 60px;
+      //     height: 40px;
+      //     border-radius: 15px;
+      //     border: none;
+      //     background-image: url("data:image/svg+xml,%3Csvg%20id%3D%22Layer_1%22%20data-name%3D%22Layer%201%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2082.6%2054.2%22%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill%3A%23f9e75e%7D%3C%2Fstyle%3E%3C%2Fdefs%3E%3Ctitle%3Ecardchip%3C%2Ftitle%3E%3Cpath%20class%3D%22cls-1%22%20d%3D%22M82.6%2011.7V3.5A3.54%203.54%200%200%200%2079.1%200H56l-4.4%204.4a1.49%201.49%200%200%201-.9.4%201.22%201.22%200%200%201-.9-.4%201.27%201.27%200%200%201%200-1.8L52.4%200H30.2l11.1%2011.2%203.8-3.8a1.27%201.27%200%200%201%201.8%201.8l-4.4%204.4v6.6a1.32%201.32%200%200%201-1.3%201.3H33v11.7h16.4V17.7a1.22%201.22%200%200%201%20.4-.9l4.7-4.7a1.49%201.49%200%200%201%20.9-.4z%22%2F%3E%3Cpath%20class%3D%22cls-1%22%20d%3D%22M82.6%2025.9V14.2H56l-4%204v7.7h30.6zM82.6%2040V28.4H52V36l4%204h26.6z%22%2F%3E%3Cpath%20class%3D%22cls-1%22%20d%3D%22M55.5%2042.5a1.22%201.22%200%200%201-.9-.4l-4.7-4.7a1.49%201.49%200%200%201-.4-.9v-1.1h-6.9v5.3L56%2054.1h23.1a3.54%203.54%200%200%200%203.5-3.5v-8.2H55.5z%22%2F%3E%3Cpath%20class%3D%22cls-1%22%20d%3D%22M30.2%2054.2h22.3L41.3%2043l-3.8%203.8a1.49%201.49%200%200%201-.9.4%201.22%201.22%200%200%201-.9-.4%201.27%201.27%200%200%201%200-1.8l4.4-4.4v-5.3h-6.9v1.1a1.22%201.22%200%200%201-.4.9L28.1%2042a1.49%201.49%200%200%201-.9.4H.1v8.2a3.54%203.54%200%200%200%203.5%203.5h23.1l4.4-4.4a1.27%201.27%200%200%201%201.8%201.8z%22%2F%3E%3Cpath%20class%3D%22cls-1%22%20d%3D%22M.1%2028.4V40h26.5l4-4v-7.6H.1zM26.6%2014.2H.1v11.7h30.5v-7.7l-4-4z%22%2F%3E%3Cpath%20class%3D%22cls-1%22%20d%3D%22M26.6%200H3.5A3.54%203.54%200%200%200%200%203.5v8.2h27.1a1.22%201.22%200%200%201%20.9.4l4.7%204.7a1.49%201.49%200%200%201%20.4.9v1.1H40v-5.3z%22%2F%3E%3C%2Fsvg%3E");
+      //     transform: translateX(0px) translateY(0px) translateZ(65px);
+      //   }
+
+      .number {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        font-size: 1em;
+        margin: auto;
+        transform: translateX(-50%) translateY(-50%) translateZ(95px);
+        font-family: "Roboto Mono", monospace;
+      }
+
+      //   .name {
+      //     position: absolute;
+      //     bottom: 40px;
+      //     left: 40px;
+      //     text-transform: uppercase;
+      //     font-size: 1em;
+      //     margin-top: 20px;
+      //     top: 50%;
+      //     left: 50%;
+      //     transform: translateX(-50%) translateY(-50%) translateZ(35px);
+      //   }
+
+      .expiry {
+        position: absolute;
+        bottom: 90px;
+        left: 40px;
+        text-transform: uppercase;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%) translateZ(35px);
+      }
+
+      .cvv {
+        text-align: center;
+        color: #000;
+        position: absolute;
+        bottom: 90px;
+        left: 240px;
+        text-transform: uppercase;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%) translateZ(35px);
+      }
+    }
+  }
+
+  @keyframes card-isometric {
+    0% {
+      transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+
+    50% {
+      transform: rotateX(60deg) rotateY(0deg) rotateZ(-45deg);
+    }
+  }
+}
+
+#crystals {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 480px;
+  height: 100%;
+}
+@-webkit-keyframes bg-crystal001 {
+  100% {
+    background-position: 0px 900px;
+  }
+}
+@-moz-keyframes bg-crystal001 {
+  100% {
+    background-position: 0px 900px;
+  }
+}
+
+@keyframes bg-crystal001 {
+  100% {
+    background-position: 0px 900px;
+  }
+}
+#crystals .crystal_01 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("http://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_01.png")
+    repeat-y;
+  -webkit-animation: bg-crystal001 30s infinite;
+  -moz-animation: bg-crystal001 30s infinite;
+  -o-animation: bg-crystal001 30s infinite;
+  animation: bg-crystal001 30s infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+
+@-webkit-keyframes bg-crystal002 {
+  100% {
+    background-position: 0px 900px;
+  }
+}
+@-moz-keyframes bg-crystal002 {
+  100% {
+    background-position: 0px 900px;
+  }
+}
+
+@keyframes bg-crystal002 {
+  100% {
+    background-position: 0px 900px;
+  }
+}
+#crystals .crystal_02 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("../../../build/assets/crystal_02.png") repeat-y;
+  -webkit-animation: bg-crystal002 60s infinite;
+  -moz-animation: bg-crystal002 60s infinite;
+  -o-animation: bg-crystal002 60s infinite;
+  animation: bg-crystal002 60s infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+@-webkit-keyframes bg-crystal003 {
+  100% {
+    background-position: 0px -1200px;
+  }
+}
+@-moz-keyframes bg-crystal003 {
+  100% {
+    background-position: 0px -1200px;
+  }
+}
+
+@keyframes bg-crystal003 {
+  100% {
+    background-position: 0px -1200px;
+  }
+}
+#crystals .crystal_03 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  margin-left: -180px;
+  background: url("../../../build/assets/crystal_03.png") repeat-y;
+  -webkit-animation: bg-crystal003 90s infinite;
+  -moz-animation: bg-crystal003 90s infinite;
+  -o-animation: bg-crystal003 90s infinite;
+  animation: bg-crystal003 90s infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+
+#worldCrystals {
+  position: fixed;
+  top: 150px;
+  left: 0;
+  width: 100%;
+  height: 520px;
+}
+#worldCrystals .crystal_01 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("../../../build/assets/world_cloud.png") no-repeat -500px 0px;
+}
+@-webkit-keyframes bg-crystal004 {
+  100% {
+    background-position: 1198px 0px;
+  }
+}
+@-moz-keyframes bg-crystal004 {
+  100% {
+    background-position: 1198px 0px;
+  }
+}
+@-o-keyframes bg-crystal004 {
+  100% {
+    background-position: 1198px 0px;
+  }
+}
+@keyframes bg-crystal004 {
+  100% {
+    background-position: 1198px 0px;
+  }
+}
+#worldCrystals .crystal_02 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("../../../build/assets/world_crystal_01.png") repeat-x;
+  -webkit-animation: bg-crystal004 60s infinite;
+  -moz-animation: bg-crystal004 60s infinite;
+  -o-animation: bg-crystal004 60s infinite;
+  animation: bg-crystal004 60s infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+@-webkit-keyframes bg-crystal005 {
+  100% {
+    background-position: 1086px 0px;
+  }
+}
+@-moz-keyframes bg-crystal005 {
+  100% {
+    background-position: 1086px 0px;
+  }
+}
+
+@keyframes bg-crystal005 {
+  100% {
+    background-position: 1086px 0px;
+  }
+}
+#worldCrystals .crystal_03 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  margin-left: -180px;
+  background: url("../../../build/assets/world_crystal_02.png") repeat-x;
+  -webkit-animation: bg-crystal005 90s infinite;
+  -moz-animation: bg-crystal005 90s infinite;
+  -o-animation: bg-crystal005 90s infinite;
+  animation: bg-crystal005 90s infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
