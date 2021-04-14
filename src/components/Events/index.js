@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState, useCallback } from "react";
 
-const url = (name, format, wrap = false) =>
+const url = (name, format = "png", wrap = false) =>
   `${wrap ? "url(" : ""}build/assets/${name}.${format}${wrap ? ")" : ""}`;
 
 const Events = (props) => {
@@ -58,6 +58,12 @@ const Events = (props) => {
           className="crystal_03"
           style={{ backgroundPosition: "0" + posY3 + "px" }}
         ></div>
+      </div>
+
+      <div className="final_fantasy">
+        <img src={url("final_fantasy_logo")} />
+        <img src={url("cloud")} />
+        <img src={url("aerith")} />
       </div>
       <div className="page">
         <div className="container">
