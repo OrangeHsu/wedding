@@ -182,6 +182,7 @@
   z-index: 10;
   overflow: hidden;
   &:hover {
+    color: #fec0ca;
     &:before {
       transform: translateX(0%);
     }

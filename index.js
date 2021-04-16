@@ -3,6 +3,7 @@ import "react-hot-loader/patch";
 import React from "react";
 import { render } from "react-dom";
 import App from "src/App";
+import "antd/dist/antd.css";
 
 const load = (Component) => {
   render(

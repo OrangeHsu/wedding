@@ -4,8 +4,9 @@ import ReactFullpage from "@fullpage/react-fullpage";
 import styled from "styled-components";
 
 const Title = lazy(() => import("../../page/title"));
+const Carousel = lazy(() => import("./carousel"));
 
-const url = (name, format, wrap = false) =>
+const url = (name, format = "svg", wrap = false) =>
   `${wrap ? "url(" : ""}build/assets/${name}.${format}${wrap ? ")" : ""}`;
 
 const UnicornAfter = styled.div`
@@ -187,6 +188,16 @@ const PaginationLines = styled.ul`
     }
   }
 `;
+
+const menuFooter = [
+  { title: "Home", url: "" },
+  { title: "About", url: "" },
+  { title: "Events", url: "" },
+  { title: "Story", url: "" },
+  { title: "Photo", url: "" },
+  { title: "Contact", url: "" },
+];
+
 const Fullpage = (props) => {
   const videoRef = useRef(null);
   const [pageSection, setPageSection] = useState(0);
@@ -210,8 +221,8 @@ const Fullpage = (props) => {
 
   const projectContent = useMemo(() => {
     const contentArr = {
-      2: { url: "", title: "HI AAA", text: "AAA", color: "rgb(194, 216, 199)" },
-      3: { url: "", title: "HI BBB", text: "BBB", color: "rgb(99, 0, 26)" },
+      3: { url: "", title: "HI AAA", text: "AAA", color: "rgb(194, 216, 199)" },
+      4: { url: "", title: "HI BBB", text: "BBB", color: "rgb(99, 0, 26)" },
     };
     return contentArr[pageSection]
       ? contentArr[pageSection]
@@ -267,6 +278,50 @@ const Fullpage = (props) => {
                 </div>
               </HomeSectionVideo>
 
+              <div className="section fullpage_block_section">
+                <main className="page-content">
+                  <div className="card">
+                    <div className="content">
+                      <h2 className="title">Mountain View</h2>
+                      <p className="copy">
+                        Check out all of these gorgeous mountain trips with
+                        beautiful views of, you guessed it, the mountains
+                      </p>
+                      <button className="btn">View Trips</button>
+                    </div>
+                  </div>
+                  <div className="card">
+                    <div className="content">
+                      <h2 className="title">To The Beach</h2>
+                      <p className="copy">
+                        Plan your next beach trip with these fabulous
+                        destinations
+                      </p>
+                      <button className="btn">View Trips</button>
+                    </div>
+                  </div>
+                  <div className="card">
+                    <div className="content">
+                      <h2 className="title">Desert Destinations</h2>
+                      <p className="copy">
+                        It's the desert you've always dreamed of
+                      </p>
+                      <button className="btn">Book Now</button>
+                    </div>
+                  </div>
+                  <div className="card">
+                    <div className="content">
+                      <h2 className="title">Explore The Galaxy</h2>
+                      <p className="copy">
+                        Seriously, straight up, just blast off into outer space
+                        today
+                      </p>
+                      <button className="btn">Book Now</button>
+                    </div>
+                  </div>
+                </main>
+              </div>
+
               <div className={`section projects`}>
                 <div
                   className={`project_item`}
@@ -311,6 +366,57 @@ const Fullpage = (props) => {
                   ></div>
                 </div>
               </div>
+              <div className="section fullpage_carousel_section">
+                <div style={{ height: "80%", width: "80%", margin: "0 auto" }}>
+                  <img
+                    src={url("quotes")}
+                    style={{
+                      width: "45px",
+                      position: "absolute",
+                      left: "50%",
+                      top: "20%",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  />
+                  <Carousel></Carousel>
+                </div>
+              </div>
+              <div
+                className="section  section-cta fullpage_footer_section"
+                style={{ height: "606px" }}
+              >
+                <div className="cta-row-one">
+                  <a href="" className="latest-work cta-item">
+                    <span className="h2">Talk to us on the phone</span>
+                    <h4>02 1234-5689</h4>
+                  </a>
+                  <a href="" className="studio-feed cta-item">
+                    <span className="h2">Get in touch by email</span>
+                    <h4>myemail@gmail.com</h4>
+                  </a>
+                </div>
+                <div className="cta-row-two get-in-touch cta-item">
+                  <img
+                    src={url("love_logo", "png")}
+                    alt="Aan and Jane's Wedding"
+                    style={{ filter: "invert(1)" }}
+                  />
+                  <div className="menu-footer-container">
+                    <ul id="menu-footer" className="menu">
+                      {menuFooter &&
+                        menuFooter.map((item, id) => {
+                          return (
+                            <li id={`menu-item-${id}`} className="menu-item ">
+                              <a href={item.url} aria-current="page">
+                                {item.title}
+                              </a>
+                            </li>
+                          );
+                        })}
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </ReactFullpage.Wrapper>
           );
         }}
@@ -328,65 +434,69 @@ const Fullpage = (props) => {
             </li>
           ))}
       </PaginationLines>
-      <div
-        className="projectBar"
-        style={{ backgroundColor: projectContent.color }}
-      ></div>
-      <span
-        className={`projectBorder`}
-        style={{ backgroundColor: projectContent.color }}
-      ></span>
-      <div
-        className={`projectBorderLeft ${
-          projectContent.color !== "" ? "active" : ""
-        }`}
-        style={{ backgroundColor: projectContent.color, color: "#fff" }}
-      >
-        <div className={`project_info`}>
-          <div className={`project_info_wrap`}>
-            <h2>
-              <a href={projectContent.url} className="view-project">
-                {projectContent.title}
-              </a>
-            </h2>
-            <p>{projectContent.text}</p>
-            <a
-              className={`view_project view_project_button new_button`}
-              href={projectContent.url}
-            >
-              View Project
-              <span>
-                <svg viewBox="0 0 49.5 10.06">
-                  <line
-                    className="a"
-                    y1="5.03"
-                    x2="48.3"
-                    y2="5.03"
-                    stroke="#fff"
-                  ></line>
-                  <path
-                    className="b"
-                    d="M41.46,9.83a.49.49,0,0,1,.16-.69L48.07,5,41.62.92a.49.49,0,0,1-.16-.69.5.5,0,0,1,.69-.15l7.12,4.53a.5.5,0,0,1,0,.84L42.15,10a.42.42,0,0,1-.26.08A.51.51,0,0,1,41.46,9.83Z"
-                  ></path>
-                </svg>
-                <svg className="second_arrow" viewBox="0 0 49.5 10.06">
-                  <line
-                    className="a"
-                    y1="5.03"
-                    x2="48.3"
-                    y2="5.03"
-                    stroke="#fff"
-                  ></line>
-                  <path
-                    className="b"
-                    d="M41.46,9.83a.49.49,0,0,1,.16-.69L48.07,5,41.62.92a.49.49,0,0,1-.16-.69.5.5,0,0,1,.69-.15l7.12,4.53a.5.5,0,0,1,0,.84L42.15,10a.42.42,0,0,1-.26.08A.51.51,0,0,1,41.46,9.83Z"
-                  ></path>
-                </svg>
-              </span>
-            </a>
+      {projectContent.color && (
+        <div>
+          <div
+            className="projectBar"
+            style={{ backgroundColor: projectContent.color }}
+          ></div>
+          <span
+            className={`projectBorder`}
+            style={{ backgroundColor: projectContent.color }}
+          ></span>
+          <div
+            className={`projectBorderLeft ${
+              projectContent.color !== "" ? "active" : ""
+            }`}
+            style={{ backgroundColor: projectContent.color, color: "#fff" }}
+          >
+            <div className={`project_info`}>
+              <div className={`project_info_wrap`}>
+                <h2>
+                  <a href={projectContent.url} className="view-project">
+                    {projectContent.title}
+                  </a>
+                </h2>
+                <p>{projectContent.text}</p>
+                <a
+                  className={`view_project view_project_button new_button`}
+                  href={projectContent.url}
+                >
+                  View Project
+                  <span>
+                    <svg viewBox="0 0 49.5 10.06">
+                      <line
+                        className="a"
+                        y1="5.03"
+                        x2="48.3"
+                        y2="5.03"
+                        stroke="#fff"
+                      ></line>
+                      <path
+                        className="b"
+                        d="M41.46,9.83a.49.49,0,0,1,.16-.69L48.07,5,41.62.92a.49.49,0,0,1-.16-.69.5.5,0,0,1,.69-.15l7.12,4.53a.5.5,0,0,1,0,.84L42.15,10a.42.42,0,0,1-.26.08A.51.51,0,0,1,41.46,9.83Z"
+                      ></path>
+                    </svg>
+                    <svg className="second_arrow" viewBox="0 0 49.5 10.06">
+                      <line
+                        className="a"
+                        y1="5.03"
+                        x2="48.3"
+                        y2="5.03"
+                        stroke="#fff"
+                      ></line>
+                      <path
+                        className="b"
+                        d="M41.46,9.83a.49.49,0,0,1,.16-.69L48.07,5,41.62.92a.49.49,0,0,1-.16-.69.5.5,0,0,1,.69-.15l7.12,4.53a.5.5,0,0,1,0,.84L42.15,10a.42.42,0,0,1-.26.08A.51.51,0,0,1,41.46,9.83Z"
+                      ></path>
+                    </svg>
+                  </span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
